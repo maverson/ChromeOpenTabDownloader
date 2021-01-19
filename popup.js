@@ -31,8 +31,15 @@ function filterURLs() {
     }
 }
 
-function donwloadURLS() {
+function downloadURLs() {
+foundLinks.forEach(download)
+}
 
+function download(input) {
+    chrome.downloads.download({
+        url: input
+        }
+    )
 }
 
 window.onload = function() {
