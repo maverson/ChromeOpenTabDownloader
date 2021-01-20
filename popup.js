@@ -14,6 +14,7 @@ function filterURLs() {
     for (var i = 0; i < foundLinks.length; i++) {
         for (var f = 0; f < fileTypes.length; f++)
         {
+            console.log(foundLinks[i] + "\n");
             if(foundLinks[i].toLocaleLowerCase().endsWith(`.${fileTypes[f]}`)) {
 
             }
@@ -45,14 +46,20 @@ function download(input) {
 window.onload = function() {
     document.getElementById('filter').onkeyup = filterURLs;//does not account for auto fillers see if a: setInterval with ObserveInputValue on the input when in focus then remove when out of focus
     document.getElementById('download').onclick = downloadURLs;
-
-    chrome.tabs.query({}, tabs => {
+    console.log("test");
+    chrome.tabs.query({}, function(tabs) {
+        for (var k = 0; k < tabs.length; k++)
+        {
+            foundLinks.push(tabs[k].url);
+        }
+        /*
         let temp;
         for (temp in tabs) {
-            if(tabs[temp].status = complete) {
-                foundLinks += tabs[temp].url;
+            if(temp.tabStatus = "complete") {
+                foundLinks += temp.url;
             }
         }
+        */
     });
 
 }
